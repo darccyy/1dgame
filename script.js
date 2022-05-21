@@ -117,8 +117,8 @@ function render() {
     ctx.fillStyle = vision[i].color;
     var hsv = F.hex2hsv(ctx.fillStyle);
     hsv.v -= (vision[i].dist / maxLength) * 100;
-    hsv.v *= (Math.abs(Math.sin(Math.PI * vision[i].x)) + 1) / 2;
-    hsv.v *= (Math.abs(Math.sin(Math.PI * vision[i].y)) + 1) / 2;
+    hsv.h += 10 * (Math.abs(Math.sin(Math.PI * vision[i].x)) + 1);
+    hsv.h += 10 * (Math.abs(Math.sin(Math.PI * vision[i].y)) + 1);
 
     ctx.fillStyle = F.hsv2hex(hsv);
     ctx.fillRect(
@@ -172,7 +172,7 @@ function update(mod) {
   ) {
     for (
       var y = Math.floor(player.y);
-      y <= Math.floor(player.y + player.y);
+      y <= Math.floor(player.y + player.h);
       y++
     ) {
       if (grid[x]?.[y]) {
